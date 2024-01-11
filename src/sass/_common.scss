@@ -1,1 +1,43 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+:root{
+    /* Varibale for Color */
+    --color-orange: orange;
+
+    /* Variable for Border */
+    --border-style: 1px solid tomato;
+}
+
+/* default / reset */
+h1,h2,h3,h4,h5,h6,p { margin: 0;}
+html { box-sizing: border-box;}
+*,*::after,*::before { box-sizing: inherit; }
+img { display: block; max-width: 100%; height: auto;}
+button, input, a {outline: none;}
+.list { list-style: none; padding: 0; margin: 0;}
+.link {text-decoration: none; color: currentColor;cursor: pointer;}
+
+body {
+    font-family: 'Roboto';
+}
+
+.container {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 48px 20px 58px;
+
+    /* general style for tablet */
+    @media screen and (min-width:768px){
+        max-width: 768px;
+    }
+
+    /* general style for desktop */
+    @media screen and (min-width:1200px) {
+        max-width: 1440px;
+    }
+}
+
+.icon {
+    fill: currentColor;
+}
