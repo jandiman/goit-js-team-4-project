@@ -1,0 +1,120 @@
+/* header section */
+.header {
+  border-bottom: var(--border-style);
+  color: #fff;
+  background-image: url('../images/backgound-image.png');
+}
+
+.logo {
+  font-size: 30px;
+  color: currentColor;
+  text-transform: capitalize;
+}
+
+.logo-name {
+  display: none;
+  width: 0px;
+  transition: width 250ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  
+  // if tablet
+  // shown
+  @media screen and (min-width:768px) {
+    display: inline;
+    width: 133px;
+  }
+}
+
+/* navigation styling */
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.nav-item {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  padding: 46px 71px;
+  gap: 48px;
+}
+
+.link.page {
+  position: relative;
+}
+
+.link.page::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  
+  transition: width 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95),
+  background-color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.link.active::after,
+.link.page:hover::after{
+  content: '';
+  width: 100%;
+  background-color: tomato;
+  
+}
+
+/* Search Bar Styling */
+.header-search {
+  display: flex;
+  justify-content: center;
+}
+
+.search-form {
+  position: relative;
+}
+
+.search-bar {
+  color: #fff;
+  width: 300px;
+  height: 30px;
+  font-size: 14px;
+  padding-right: 56px;
+  padding-left: 5px;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid #fff;
+  outline: none;
+}
+
+.search-bar::placeholder {
+  color: #fff;
+}
+
+.btn-search {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background-color: transparent;
+  color: #fff;
+  border-color: transparent;
+  cursor: pointer;
+}
+
+.btn-search .icon {
+  transform: scale(1);
+  transition: transform 250ms cubic-bezier(0.39, 0.575, 0.565, 1),
+  fill  250ms cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.btn-search:hover .icon,
+.btn-search:focus .icon {
+  fill: var(--color-orange);
+  transform: scale(1.18);
+}
