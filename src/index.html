@@ -3,11 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="./images/logo.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="./images/logo.svg" type="image/x-icon" />
     <title>Page title</title>
     <link rel="stylesheet" href="./sass/index.scss" />
   </head>
   <body>
+    <div class="content">
+      <div id="moviesList"></div>
+      <div class="pagination">
+        <ul id="pageNumbers"></ul>
+      </div>
+      <div class="search">
+        <input type="text" id="searchInput" placeholder="Search movies" />
+        <button onclick="searchMovies()">Search</button>
+      </div>
+    </div>
     <!-- ❗️❗️❗️ Add partials like so for every page -->
     <include src="./partials/header.html"></include>
     <!-- script -->
