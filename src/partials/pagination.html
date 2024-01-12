@@ -23,13 +23,13 @@ const moviesList = document.getElementById('moviesList');
     const pageNumbers = document.getElementById('pageNumbers');
     const searchInput = document.getElementById('searchInput');
 
-    const apiKey = 'YOUR_OMDB_API_KEY'; // Replace with your OMDB API key
+    const apiKey = 'YOUR_OMDB_API_KEY'; // Replace with your Open Movie Data Base API key
 
     let currentPage = 1;
 
     async function fetchMovies() {
       const searchQuery = searchInput.value.trim();
-      const url = `http://www.omdbapi.com/?s=${searchQuery}&apikey=${apiKey}&page=${currentPage}`;
+      const url = `http://www.omdbapi.com/?s=${searchQuery}&apikey=${apiKey}&page=${currentPage}`;// Replace your open movie data base API KEY
 
       try {
         const response = await fetch(url);
@@ -74,3 +74,5 @@ const moviesList = document.getElementById('moviesList');
 
     // Initial load
     fetchMovies();
+
+        //TESTING CODES//
