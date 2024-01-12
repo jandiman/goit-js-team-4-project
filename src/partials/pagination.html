@@ -17,3 +17,60 @@ styles css body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
 .pagination li { display: inline; margin-right: 5px; padding: 8px; cursor:
 pointer; transition: background-color 0.3s ease; } .pagination li.active {
 background-color: #4caf50; color: white; }
+
+//////////////////////////////////////////////////////////////////
+const moviesList = document.getElementById('moviesList');
+    const pageNumbers = document.getElementById('pageNumbers');
+    const searchInput = document.getElementById('searchInput');
+
+    const apiKey = 'YOUR_OMDB_API_KEY'; // Replace with your OMDB API key
+
+    let currentPage = 1;
+
+    async function fetchMovies() {
+      const searchQuery = searchInput.value.trim();
+      const url = `http://www.omdbapi.com/?s=${searchQuery}&apikey=${apiKey}&page=${currentPage}`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.Response === 'True') {
+          displayMovies(data.Search);
+          displayPagination(data.totalResults);
+        } else {
+          moviesList.innerHTML = '<p>No results found</p>';
+          pageNumbers.innerHTML = '';
+        }
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      }
+    }
+
+    function displayMovies(movies) {
+      moviesList.innerHTML = movies.map(movie => `<div>${movie.Title}</div>`).join('');
+    }
+
+    function displayPagination(totalResults) {
+      const totalPages = Math.ceil(totalResults / 10); // Assuming 10 results per page
+
+      pageNumbers.innerHTML = '';
+
+      for (let i = 1; i <= totalPages; i++) {
+        const li = document.createElement('li');
+        li.innerText = i;
+        li.addEventListener('click', () => {
+          currentPage = i;
+          fetchMovies();
+        });
+        pageNumbers.appendChild(li);
+      }
+    }
+
+    function searchMovies() {
+      currentPage = 1;
+      fetchMovies();
+    }
+
+    // Initial load
+    fetchMovies();
