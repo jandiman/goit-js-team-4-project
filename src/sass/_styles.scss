@@ -1,8 +1,25 @@
 /* header section */
+$_home-background: url('../images/backgound-image.png');
+$_home-background-2: url('../images/background-image@2x.png');
+$_backgroundImage: url('../images/background-library.png');
+$_backgroundImage-2: url('../images/background-library@2x.png');
+
 .header {
   border-bottom: var(--border-style);
   color: #fff;
-  background-image: url('../images/backgound-image.png');
+  background-image: $_home-background;
+  background-repeat: no-repeat;
+  @media screen and (min-width:930px) {
+    background-image: $_home-background-2;
+    background-size: 100%;
+  }
+}
+.header.library {
+  background-image: $_backgroundImage;
+
+  @media screen and (min-width:980px) {
+    background-image: $_backgroundImage-2;
+  }
 }
 
 .logo {
@@ -118,3 +135,34 @@
   fill: var(--color-orange);
   transform: scale(1.18);
 }
+
+// button Styling 
+
+.btn-list {
+  display: flex;
+  gap: 25px;
+}
+
+.btn-list button {
+  width: 136px;
+  height: 44px;
+  border-radius: 5px;
+  border: 1px solid #FFF;
+}
+
+button.btn {
+  color: #FFF;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px; /* 133.333% */
+  background-color: transparent;
+  cursor: pointer;
+}
+
+button.active,
+button.btn:hover {
+  background: #FF6B01;
+  /* btn light */
+  box-shadow: 0px 8px 43px 0px rgba(255, 107, 1, 0.60);
+}
+
