@@ -150,7 +150,7 @@ function renderItem(data){
       } = data;
     return `<a href="${poster_path ? IMAGE_URL + poster_path : 'https://static.wikia.nocookie.net/ideas/images/6/66/FoxAndroidTM2%27s_No_Poster.jpg'}" class="link">
                     <div class="poster-card">
-                      <img src="${poster_path ? IMAGE_URL + poster_path : 'https://static.wikia.nocookie.net/ideas/images/6/66/FoxAndroidTM2%27s_No_Poster.jpg'}" alt="${title}" class="poster-image"/>
+                      <img src="${poster_path ? IMAGE_URL + poster_path : 'https://static.wikia.nocookie.net/ideas/images/6/66/FoxAndroidTM2%27s_No_Poster.jpg'}" alt="${title}" class="poster-image" />
                       <h4 class="poster-title">${title}</h4>
                       <ul class="list genre-list">${genres.map(({name})=>{
                         return `<li><span>${name}</span></li>`;
