@@ -1,3 +1,296 @@
+/* header section */
+$_home-background: url('../images/backgound-image.png');
+$_home-background-2: url('../images/background-image@2x.png');
+$_backgroundImage: url('../images/background-library.png');
+$_backgroundImage-2: url('../images/background-library@2x.png');
+
+
+// =============================================
+//          custoM basiclightbox
+// =============================================
+
+.basicLightbox {
+  background-color: #0003;
+}
+
+// ============================================
+//          LOADER CUSTOM
+// ============================================
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 3px solid #FF6B01;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  box-shadow: 0 0 2px 5px #FF6B08;
+}
+.loader::after {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid;
+  border-color: #FF3D00 transparent;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// =============================================
+.header {
+  border-bottom: var(--border-style);
+  color: #fff;
+  background-image: linear-gradient(to right, #0003, #0002 ), $_home-background;
+  background-repeat: no-repeat;
+  transition: background-image 250ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  @media screen and (min-width:930px) {
+    background-image: linear-gradient(to right, #0002, #0001), $_home-background-2;
+    background-size: 100%;
+  }
+}
+.header.library {
+  background-image: linear-gradient(to right, #0005, #0002 ), $_backgroundImage;
+
+  @media screen and (min-width:980px) {
+    background-image: linear-gradient(to right, #0003, #0001 )1, $_backgroundImage-2;
+  }
+}
+
+.logo {
+  font-size: 30px;
+  color: currentColor;
+  text-transform: capitalize;
+}
+
+.logo-name {
+  display: none;
+  width: 0px;
+  transition: width 250ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  
+  // if tablet
+  // shown
+  @media screen and (min-width:768px) {
+    display: inline;
+    width: 133px;
+  }
+}
+
+/* navigation styling */
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.nav-item {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  padding: 46px 71px;
+  gap: 48px;
+}
+
+.link.page {
+  position: relative;
+}
+
+.link.page::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  
+  transition: width 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95),
+  background-color 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.link.active::after,
+.link.page:hover::after{
+  content: '';
+  width: 100%;
+  background-color: tomato;
+  
+}
+
+/* Search Bar Styling */
+.header-search {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.search-form {
+  position: relative;
+}
+
+.search-bar {
+  color: #FFF;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 300px;
+  height: 30px;
+  font-size: 14px;
+  padding-right: 26px;
+  padding-left: 5px;
+  background-color: #0003;
+  border: 0;
+  border-bottom: 1px solid #fff;
+  text-shadow: 0 1px 1px #000;
+  outline: none;
+}
+
+.search-bar::placeholder {
+  color: #fff;
+}
+
+.btn-search {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background-color: transparent;
+  color: #fff;
+  border-color: transparent;
+  cursor: pointer;
+}
+
+.bad-result {
+  color: #FF3D00;
+  text-align: center;
+  min-height: 0;
+  font-size: 12px;
+}
+
+.btn-search .icon {
+  transform: scale(1);
+  transition: transform 250ms cubic-bezier(0.39, 0.575, 0.565, 1),
+  fill  250ms cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.btn-search:hover .icon,
+.btn-search:focus .icon {
+  fill: var(--color-orange);
+  transform: scale(1.18);
+}
+
+// button Styling 
+
+.btn-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+
+  @media screen and (min-width:380px) {
+    flex-wrap: nowrap;
+  }
+}
+
+.btn-list button {
+  width: 136px;
+  height: 44px;
+  border-radius: 5px;
+  border: 1px solid #FFF;
+}
+
+button.btn {
+  color: #FFF;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px; /* 133.333% */
+  background-color: transparent;
+  cursor: pointer;
+}
+
+button.active,
+button.btn:hover {
+  background: #FF6B01;
+  /* btn light */
+  box-shadow: 0px 8px 43px 0px rgba(255, 107, 1, 0.60);
+}
+
+button.active {
+  border: #000e;
+}
+
+// style for card poster
+// item description
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px 3%;
+  min-height: 450px;
+  justify-content: center;
+  @media screen and (min-width:768px) {
+    justify-content: flex-start;
+  }
+}
+
+.poster-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  width: fit-content;
+}
+
+.poster-title {
+  width: 274px;
+}
+
+.genre-list {
+  display: flex;
+  width: 274px;
+
+  gap: 5px;
+  flex-wrap: wrap;
+
+  // font 
+  color: #FF6B08;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+// image fixed size
+.poster-image {
+  width: 274px;
+  height: 398px;
+}
+
+// ========================
+//    END OF HEADER AND CONTENT
+// =========================
+
+
+
+
+
 
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */

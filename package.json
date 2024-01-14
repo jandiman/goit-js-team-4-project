@@ -21,7 +21,7 @@
     "basiclightbox": "^5.0.4",
     "modern-normalize": "^1.1.0",
     "node-fetch": "^2.7.0",
-    "notiflix": "^3.2.7"
+    "notiflix": "^3.2.7",
     "simplelightbox": "^2.14.2",
     "swiper": "^11.0.5"
   },
