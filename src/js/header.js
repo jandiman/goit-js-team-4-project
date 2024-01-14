@@ -6,11 +6,13 @@ const activeHeader = document.querySelectorAll('.page');
 const btnHeader = document.querySelector('#header-option');
 const headerBg = document.querySelector('.header');
 const contentEl = document.querySelector('#content');
+const pageNav = document.querySelector('#pageNumbers');
 
 window.addEventListener('DOMContentLoaded',()=>{
     if(!localStorage.getItem('SAVED_CURRENT')){
         return;
     }
+
     const setDefault = {
         currentPage: 'home', // load to recent page
         currentTheme: 'system',
@@ -55,6 +57,7 @@ navHeader.addEventListener('click', (event)=>{
     // removing exist markup
     // creating new Mark up
     contentEl.innerHTML = '';
+    pageNav.innerHTML = '';
     btnHeader.innerHTML = 
     `<ul class="list btn-list">
         <li><button type="button" class="btn active" data-watched>WATCHED</button></li>
