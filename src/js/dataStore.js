@@ -21,7 +21,8 @@ const defaults = {
     adult:'false',
     sort: 'created_at.asc',
     lang: 'en-US',
-}
+};
+let currentOpen = '';
 
 
 async function movieRender() {
@@ -29,6 +30,7 @@ async function movieRender() {
         
         contentEl.innerHTML = '';
         pageListEl.innerHTML = '';
+        currentOpen = "binuksan";
         instance.show();
         const data = await movieSearch(defaults);
         instance.close();
@@ -68,14 +70,55 @@ async function movieRender() {
     }
 }
 
-pageListEl.addEventListener('click',(event)=>{
+pageListEl.addEventListener('click',async (event)=>{
     console.log(event.target.nodeName);
     if(event.target.nodeName !== 'SPAN'){
         return;
     }
     defaults.page = event.target.dataset.page;
     console.log( event.target.dataset.page);
-    movieRender();
+    const loadDefaults = {
+        time_window: 'day', // 2 value [day/week]
+        ...defaults,
+    }
+
+    if(currentOpen !== ''){
+        movieRender();
+        return;
+    }
+
+    try{
+        instance.show();   
+        const data = await movieTrend(loadDefaults);
+            
+        // get results
+        // get total_pages
+        const {results,total_pages} = data;
+        // console.log(results);
+        // console.log(total_pages);
+    
+        contentEl.innerHTML = '';
+        results.map(async ({id})=>{
+            try{
+            // calling data details of ids
+            const data = await movieDetail(id);
+            // rendering markup
+            contentEl.insertAdjacentHTML('beforeend',renderItem(data));
+            }catch(err){
+                console.log(err);
+            }
+        }).join('');   
+        
+        pageListEl.innerHTML = '';
+        pageListEl.insertAdjacentHTML('beforeend', `
+        <li><button type="button" class="btn-page">&larr;</button></li>
+        ${pageNav(total_pages)}
+        <li><button type="button" class="btn-page">&rarr;</button></li>`);
+
+        instance.close();
+        }catch(err){
+            console.log(err);
+        }
 })
 
 searchEl.addEventListener('submit',(event)=>{
@@ -129,6 +172,12 @@ window.addEventListener('DOMContentLoaded', async ()=>{
         }
     }).join('');   
     
+    pageListEl.innerHTML = '';
+        pageListEl.insertAdjacentHTML('beforeend', `
+        <li><button type="button" class="btn-page">&larr;</button></li>
+        ${pageNav(total_pages)}
+        <li><button type="button" class="btn-page">&rarr;</button></li>`);
+
     Notify.success('All Trend movies are loaded!',{
         position: 'center-top',
     });
