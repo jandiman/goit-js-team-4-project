@@ -33,8 +33,8 @@ export function movieDetail(id) {
     });
   }
 
-  export function movieTrend({time_window,lang}) {
-    const url_search = `${BASE_URL}/trending/movie/${time_window}?language=${lang}&api_key=${API_KEY}`;
+  export function movieTrend({time_window,lang,page}) {
+    const url_search = `${BASE_URL}/trending/movie/${time_window}?language=${lang}&page=${page}&api_key=${API_KEY}`;
     return fetch(url_search, options)
     .then(res => {
       if (!res.ok) {

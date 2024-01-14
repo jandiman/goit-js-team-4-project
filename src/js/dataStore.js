@@ -14,6 +14,7 @@ console.log(basicLightbox);
 const contentEl = document.querySelector('.content');
 const searchEl = document.querySelector('#search___form');
 const searchBox = document.querySelector('#header-option');
+const pageListEl = document.querySelector('#pageNumbers');
 const defaults = {
     data:'trend',
     page:'1',
@@ -27,13 +28,14 @@ async function movieRender() {
     try{
         
         contentEl.innerHTML = '';
+        pageListEl.innerHTML = '';
         instance.show();
         const data = await movieSearch(defaults);
         instance.close();
         // get results
         // get total_pages
         const {results,total_pages} = data;
-        // console.log(total_pages);
+        console.log(total_pages);
         if(results.length == 0){
             if(!document.querySelector('.bad-result')){
                 searchBox.insertAdjacentHTML('afterend','<p class="bad-result">Search result not successful. Enter the correct movie name and title</p>');
@@ -55,20 +57,31 @@ async function movieRender() {
                 console.log(err);
             }
         }).join('');
-
-
-        Notify.success('Search complete!<br>All data Successfully loaded!',{
-            position:'center-top',
-        });
+        
+        pageListEl.innerHTML = '';
+        pageListEl.insertAdjacentHTML('beforeend', `
+        <li><button type="button" class="btn-page">&larr;</button></li>
+        ${pageNav(total_pages)}
+        <li><button type="button" class="btn-page">&rarr;</button></li>`);
     }catch (err){
         console.log(err);
     }
 }
 
+pageListEl.addEventListener('click',(event)=>{
+    console.log(event.target.nodeName);
+    if(event.target.nodeName !== 'SPAN'){
+        return;
+    }
+    defaults.page = event.target.dataset.page;
+    console.log( event.target.dataset.page);
+    movieRender();
+})
+
 searchEl.addEventListener('submit',(event)=>{
     event.preventDefault();
 
-    if(!document.getElementById('search_item').value){
+    if(!document.getElementById('search_item').value.trim()){
         Notify.warning('No Inputted Data',{
             position:'center-top',
         });
@@ -81,6 +94,7 @@ searchEl.addEventListener('submit',(event)=>{
     if(document.querySelector('.bad-result')){
         document.querySelector('.bad-result').remove();
     }
+
     movieRender();
 
     
@@ -136,7 +150,7 @@ function renderItem(data){
       } = data;
     return `<a href="${poster_path ? IMAGE_URL + poster_path : 'https://static.wikia.nocookie.net/ideas/images/6/66/FoxAndroidTM2%27s_No_Poster.jpg'}" class="link">
                     <div class="poster-card">
-                      <img src="${poster_path ? IMAGE_URL + poster_path : 'https://static.wikia.nocookie.net/ideas/images/6/66/FoxAndroidTM2%27s_No_Poster.jpg'}" alt="${title}" class="poster-image"/>
+                      <img src="${poster_path ? IMAGE_URL + poster_path : 'https://static.wikia.nocookie.net/ideas/images/6/66/FoxAndroidTM2%27s_No_Poster.jpg'}" alt="${title}" class="poster-image" />
                       <h4 class="poster-title">${title}</h4>
                       <ul class="list genre-list">${genres.map(({name})=>{
                         return `<li><span>${name}</span></li>`;
@@ -148,6 +162,47 @@ function renderItem(data){
                     </div>
                 </a>
               `;
+}
+
+const pageNav = (pages) =>{
+    let storedList = "";
+        let numPage = 1;
+        let countdown = 0;
+        switch(parseInt(defaults.page)){
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                break;
+            default:
+                numPage = parseInt(defaults.page) - 2;
+                storedList += `
+                <li>
+                <span class="btn-page" data-page="1">1</span>
+                </li>
+                <li>...</li>`;
+                break;
+        }
+        for (let i = numPage; i <= pages; i++) {
+            let currentPage = ''; 
+            if(i===parseInt(defaults.page)){
+                currentPage += " active";
+            }
+            storedList += `
+            <li>
+            <span class="btn-page${currentPage}" data-page="${i}">${i}</span>
+            </li>`;
+            countdown+=1;
+            if(countdown===5){
+                storedList += `
+                <li>...</li>
+                <li>
+                <span class="btn-page" data-page="${pages}">${pages}</span>
+                </li>`;
+                break;
+            }
+        }
+    return storedList;
 }
 
 export default renderItem;

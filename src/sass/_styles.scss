@@ -283,6 +283,32 @@ button.active {
   height: 398px;
 }
 
+.pageNumbers {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.btn-page {
+  font-size: 12px;
+  padding: 5px;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.btn-page.active,
+.btn-page:hover{
+  border-radius: 5px;
+  color: #FFF;
+  background: #FF6B08;
+}
+
+.pagination{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
 // ========================
 //    END OF HEADER AND CONTENT
 // =========================
