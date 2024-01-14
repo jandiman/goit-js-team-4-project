@@ -1,0 +1,51 @@
+:root {
+  --red: #ff6b08;
+  --dirtywhite: #f7f7f7;
+  --black: #545454;
+}
+
+.footer-section {
+  width: auto;
+  height: 77px;
+  display: flex;
+  background-color: var(--dirtywhite);
+}
+
+.footer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
+.footer-content {
+  color: var(--black);
+  text-align: center;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.footer-heart {
+  padding-left: 10px;
+  padding-right: 6px;
+}
+
+.footer-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.goit-students {
+  text-decoration: underline;
+}
+
+.is-hidden {
+  visibility: none;
+  opacity: 0;
+  pointer-events: none;
+}
