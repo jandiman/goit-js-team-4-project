@@ -101,7 +101,7 @@ br {
   }
 
   @media screen and (min-width: 1200px) {
-    width: 1200px;
+    width: 820px;
   }
 }
 
@@ -167,7 +167,7 @@ br {
 // Swiper
 
 .mySwiper {
-  margin-top: 40px;
+  margin-top: 20px;
   width: 50%;
   height: 50%;
   border-radius: 15px;
@@ -175,6 +175,7 @@ br {
 
 .footer-main-title {
   text-align: center;
+  padding-left: 6px;
 }
 
 .footer-name {
