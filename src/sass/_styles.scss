@@ -23,6 +23,53 @@ $_home-background-2: url('../images/background-image@2x.png');
 $_backgroundImage: url('../images/background-library.png');
 $_backgroundImage-2: url('../images/background-library@2x.png');
 
+
+// =============================================
+//          custoM basiclightbox
+// =============================================
+
+.basicLightbox {
+  background-color: #0003;
+}
+
+// ============================================
+//          LOADER CUSTOM
+// ============================================
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 3px solid #FF6B01;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  box-shadow: 0 0 2px 5px #FF6B08;
+}
+.loader::after {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid;
+  border-color: #FF3D00 transparent;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// =============================================
 .header {
   border-bottom: var(--border-style);
   color: #fff;
@@ -110,6 +157,7 @@ $_backgroundImage-2: url('../images/background-library@2x.png');
 .header-search {
   display: flex;
   justify-content: center;
+  gap: 10px;
 }
 
 .search-form {
@@ -148,6 +196,13 @@ $_backgroundImage-2: url('../images/background-library@2x.png');
   color: #fff;
   border-color: transparent;
   cursor: pointer;
+}
+
+.bad-result {
+  color: #FF3D00;
+  text-align: center;
+  min-height: 0;
+  font-size: 12px;
 }
 
 .btn-search .icon {
@@ -200,4 +255,49 @@ button.btn:hover {
 
 button.active {
   border: #000e;
+}
+
+// style for card poster
+// item description
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px 3%;
+  min-height: 450px;
+  justify-content: center;
+  @media screen and (min-width:768px) {
+    justify-content: flex-start;
+  }
+}
+
+.poster-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  width: fit-content;
+}
+
+.poster-title {
+  width: 274px;
+}
+
+.genre-list {
+  display: flex;
+  width: 274px;
+
+  gap: 5px;
+  flex-wrap: wrap;
+
+  // font 
+  color: #FF6B08;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+// image fixed size
+.poster-image {
+  width: 274px;
+  height: 398px;
 }
