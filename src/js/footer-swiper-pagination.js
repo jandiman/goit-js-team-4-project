@@ -1,9 +1,11 @@
+import Swiper from 'swiper';
+
 const swiper = new Swiper('.mySwiper', {
   speed: 400,
   slidesPerView: 5,
   spaceBetween: 30,
   breakpoints: {
-    0: {
+    358: {
       slidesPerView: 3,
       spaceBetween: 30,
     },
@@ -24,4 +26,4 @@ const swiper = new Swiper('.mySwiper', {
   },
 });
 
-// swiper.nextSlide();
+swiper.nextSlide();
