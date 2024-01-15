@@ -77,12 +77,9 @@ const modalModule = (function () {
             const content = document.createElement('div');
             content.innerHTML = `
               <h2>${movieData.title}</h2>
-              <p>Original Title   ${movieData.title}</p>
-              <p>Genre ${movieData.genre}</p>
-              <p>About</p>
-              <p>${movieData.overview}</p>
-              <button class="button">ADD TO WATCHED</button>
-              <button class="button">ADD TO QUEUE</button>
+
+              <p>${'About' + movieData.overview}</p>
+              <p>Release Year: ${movieData.release_date}</p>
             `;
             showModal(content);
           } catch (error) {

@@ -63,6 +63,10 @@ const modalModule = (function () {
   async function openModal(event) {
     event.preventDefault();
 
+    const IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
+    // destructing keys
+    const { id, title, poster_path, genres, release_date } = data;
+
     if (event.target.nodeName === 'IMG') {
       showLoader();
 
@@ -76,13 +80,16 @@ const modalModule = (function () {
             const movieData = await fetchMovieDataFromAPI(movieId);
             const content = document.createElement('div');
             content.innerHTML = `
+            <a href="${
+              poster_path
+                ? IMAGE_URL + poster_path
+                : 'https://static.wikia.nocookie.net/ideas/images/6/66/FoxAndroidTM2%27s_No_Poster.jpg'
+            }" class="link">
               <h2>${movieData.title}</h2>
               <p>Original Title   ${movieData.title}</p>
               <p>Genre ${movieData.genre}</p>
               <p>About</p>
               <p>${movieData.overview}</p>
-              <button class="button">ADD TO WATCHED</button>
-              <button class="button">ADD TO QUEUE</button>
             `;
             showModal(content);
           } catch (error) {

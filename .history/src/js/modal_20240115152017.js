@@ -35,12 +35,12 @@ const modalModule = (function () {
     loaderContainer.style.display = 'none';
   }
 
-  function showModal(content) {
-    hideLoader();
-    modalContent.innerHTML = '';
-    modalContent.appendChild(content);
-    movieModal.style.display = 'block';
-  }
+  // function showModal(content) {
+  //   hideLoader();
+  //   modalContent.innerHTML = '';
+  //   modalContent.appendChild(content);
+  //   movieModal.style.display = 'block';
+  // }
 
   function hideModal() {
     movieModal.style.display = 'none';
@@ -81,8 +81,7 @@ const modalModule = (function () {
               <p>Genre ${movieData.genre}</p>
               <p>About</p>
               <p>${movieData.overview}</p>
-              <button class="button">ADD TO WATCHED</button>
-              <button class="button">ADD TO QUEUE</button>
+              <button></button>
             `;
             showModal(content);
           } catch (error) {

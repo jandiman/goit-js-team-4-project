@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.themoviedb.org/3';
+bconst BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = 'df3d71dc2c14b1899746da6d2afcfb5b';
 
 const modalModule = (function () {

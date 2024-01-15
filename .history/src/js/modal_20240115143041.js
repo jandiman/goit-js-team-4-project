@@ -1,6 +1,8 @@
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = 'df3d71dc2c14b1899746da6d2afcfb5b';
 
+import { movieDetail } from './movie-api';
+
 const modalModule = (function () {
   const movieModal = document.getElementById('movieModal');
   const closeModalBtn = document.getElementById('closeModalBtn');
@@ -10,7 +12,7 @@ const modalModule = (function () {
 
   contentEl.addEventListener('click', openModal);
 
-  async function fetchMovieDataFromAPI(movieId) {
+  async function movieDetail(movieId) {
     const apiEndpoint = `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`;
 
     try {
@@ -66,23 +68,18 @@ const modalModule = (function () {
     if (event.target.nodeName === 'IMG') {
       showLoader();
 
-      const targetMovieLink = event.target.id;
-      console.log(targetMovieLink);
+      const targetMovieLink = event.target.closest('.link');
       if (targetMovieLink) {
-        const movieId = targetMovieLink;
+        const movieId = targetMovieLink.dataset.movieId;
 
         if (movieId) {
           try {
-            const movieData = await fetchMovieDataFromAPI(movieId);
+            const movieData = await movieDetail(movieId);
             const content = document.createElement('div');
             content.innerHTML = `
               <h2>${movieData.title}</h2>
-              <p>Original Title   ${movieData.title}</p>
-              <p>Genre ${movieData.genre}</p>
-              <p>About</p>
               <p>${movieData.overview}</p>
-              <button class="button">ADD TO WATCHED</button>
-              <button class="button">ADD TO QUEUE</button>
+              <p>Release Year: ${movieData.release_date}</p>
             `;
             showModal(content);
           } catch (error) {

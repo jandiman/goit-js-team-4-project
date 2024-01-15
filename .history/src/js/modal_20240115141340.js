@@ -1,5 +1,5 @@
 const BASE_URL = 'https://api.themoviedb.org/3';
-const API_KEY = 'df3d71dc2c14b1899746da6d2afcfb5b';
+const API_KEY = '4b17c8220205f4ea5b673c20a3e1f458';
 
 const modalModule = (function () {
   const movieModal = document.getElementById('movieModal');
@@ -66,10 +66,9 @@ const modalModule = (function () {
     if (event.target.nodeName === 'IMG') {
       showLoader();
 
-      const targetMovieLink = event.target.id;
-      console.log(targetMovieLink);
+      const targetMovieLink = event.target.closest('.link');
       if (targetMovieLink) {
-        const movieId = targetMovieLink;
+        const movieId = targetMovieLink.dataset.movieId;
 
         if (movieId) {
           try {
@@ -77,12 +76,8 @@ const modalModule = (function () {
             const content = document.createElement('div');
             content.innerHTML = `
               <h2>${movieData.title}</h2>
-              <p>Original Title   ${movieData.title}</p>
-              <p>Genre ${movieData.genre}</p>
-              <p>About</p>
               <p>${movieData.overview}</p>
-              <button class="button">ADD TO WATCHED</button>
-              <button class="button">ADD TO QUEUE</button>
+              <p>Release Year: ${movieData.release_date}</p>
             `;
             showModal(content);
           } catch (error) {

@@ -81,8 +81,7 @@ const modalModule = (function () {
               <p>Genre ${movieData.genre}</p>
               <p>About</p>
               <p>${movieData.overview}</p>
-              <button class="button">ADD TO WATCHED</button>
-              <button class="button">ADD TO QUEUE</button>
+              <button></button>
             `;
             showModal(content);
           } catch (error) {

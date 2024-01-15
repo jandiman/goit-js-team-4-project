@@ -1,0 +1,41 @@
+/* Additional Modal Content Styles */
+#modalContent {
+  text-align: center;
+}
+
+#modalContent h2 {
+  color: #333;
+  font-size: 1.5em;
+}
+
+#modalContent p {
+  color: #666;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+/* Update Modal Content Styles */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+  border-radius: 8px;
+  text-align: left; /* Align text to the left */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #555;
+  transition: color 0.3s; /* Add transition effect to the color */
+}
+
+.close-modal:hover {
+  color: #333; /* Change color on hover */
+}
