@@ -104,24 +104,25 @@ navHeader.addEventListener('click', (event)=>{
             return;
         }
         data = JSON.parse(data);
-        data.dataQueued.map((el)=>{
-            btnTabRender(el);
-        })
+        
+        console.log(data.dataQueued)
+        data.dataQueued.forEach((data)=>{
+            console.log(data);
+            btnTabRender(data);
+        });
 
         // btnTabRender(data.currentQueue);
     })
 });
 
-function btnTabRender(data) {
-    contentEl.innerHTML = "";
-    data.map(async (id)=>{
+async function btnTabRender(data1) {
             try{
+            contentEl.innerHTML = '';
             // calling data details of ids
-            const data = await movieDetail(id);
+            const data = await movieDetail(data1);
             // rendering markup
             contentEl.insertAdjacentHTML('beforeend',renderItem(data));
             }catch(err){
                 console.log(err);
             }
-    })
 }
