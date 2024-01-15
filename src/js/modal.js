@@ -3,8 +3,6 @@ const modalModule = (function () {
   const closeModalBtn = document.getElementById('closeModal');
   const modalContent = document.getElementById('modalContent');
   const loaderContainer = document.getElementById('loaderContainer');
-  const modalPoster = document.getElementById('modalPoster');
-  const modalTitle = document.getElementById('modalTitle');
 
   function showLoader() {
     loaderContainer.style.display = 'flex';
@@ -15,14 +13,12 @@ const modalModule = (function () {
   }
 
   function showModal(movieData) {
-    modalTitle.textContent = movieData.title;
     modalContent.innerHTML = `
-              <h2>${movieData.title}</h2>
-              <img src="${movieData.posterUrl}" alt="${movieData.title} Poster" id="modalPoster">
-              <p>${movieData.description}</p>
-              <p>Release Year: ${movieData.releaseYear}</p>
-              <!-- Add more movie details as needed -->
-          `;
+            <h2>${movieData.title}</h2>
+            <p>${movieData.description}</p>
+            <p>Release Year: ${movieData.releaseYear}</p>
+            <!-- Add more movie details as needed -->
+        `;
     hideLoader();
     movieModal.style.display = 'block';
   }
@@ -54,22 +50,20 @@ const modalModule = (function () {
 })();
 
 document.addEventListener('DOMContentLoaded', function () {
-  const posterCards = document.querySelectorAll('.poster-card');
+  const movieCard = document.getElementById('movieCard');
 
-  posterCards.forEach(function (posterCard) {
-    posterCard.addEventListener('click', function () {
-      modalModule.showLoader();
+  movieCard.addEventListener('click', function () {
+    modalModule.showLoader();
 
-      // asynchronous request to fetch movie information
-      fetchMovieInformation()
-        .then(movieData => {
-          modalModule.showModal(movieData);
-        })
-        .catch(error => {
-          console.error('Error fetching movie information:', error);
-          modalModule.hideLoader();
-        });
-    });
+    // asynchronous request to fetch movie information
+    fetchMovieInformation()
+      .then(movieData => {
+        modalModule.showModal(movieData);
+      })
+      .catch(error => {
+        console.error('Error fetching movie information:', error);
+        modalModule.hideLoader();
+      });
   });
 
   // function to fetch movie information from an API
@@ -81,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
           title: 'Sample Movie',
           description: 'This is a sample movie description.',
           releaseYear: 2022,
-          posterUrl: 'path/to/sample-poster.jpg',
         };
         resolve(movieData);
       }, 2000);
