@@ -61,13 +61,13 @@ navHeader.addEventListener('click', (event)=>{
     btnHeader.innerHTML = 
     `<ul class="list btn-list">
         <li><button type="button" class="btn active" data-watched>WATCHED</button></li>
-        <li><button type="button" class="btn" data-queue>QUEUED</button></li>
+        <li><button type="button" class="btn" data-queued>QUEUED</button></li>
     </ul>`;
 
     // create DOM Element
     // after rendering buttons
     const btnWatched = document.querySelector('button[data-watched]');
-    const btnQueue = document.querySelector('button[data-queue]');
+    const btnQueue = document.querySelector('button[data-queued]');
 
     // create event
     // after rendering buttons
@@ -77,14 +77,18 @@ navHeader.addEventListener('click', (event)=>{
         event.currentTarget.classList.add('active');
         btnQueue.classList.remove('active');
 
-        const data = localStorage.getItem('SAVED_CURRENT');
-
+        let data = localStorage.getItem('SAVED_CURRENT');
+        console.log(JSON.parse(data));
         if(!data){
             contentEl.innerHTML = "WALAY SULOD ang WATCHED!";
             return;
         }
+        data = JSON.parse(data);
+        data.dataWatched.forEach((el)=>{
+            btnTabRender(el);
+        })
 
-        btnTabRender(data.currentWatch);
+        // btnTabRender(data.currentWatch);
     });
     btnQueue.addEventListener('click', event =>{
         console.log('queue');
@@ -93,14 +97,18 @@ navHeader.addEventListener('click', (event)=>{
         btnWatched.classList.remove('active');
         
 
-        const data = JSON.parse(localStorage.getItem('SAVED_CURRENT'));
-
+        let data = localStorage.getItem('SAVED_CURRENT');
+        console.log(JSON.parse(localStorage.getItem('SAVED_CURRENT')));
         if(!data){
             contentEl.innerHTML = "WALAY SULOD ang QUEUE!";
             return;
         }
+        data = JSON.parse(data);
+        data.dataQueued.map((el)=>{
+            btnTabRender(el);
+        })
 
-        btnTabRender(data.currentQueue);
+        // btnTabRender(data.currentQueue);
     })
 });
 
