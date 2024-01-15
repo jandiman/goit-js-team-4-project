@@ -107,7 +107,7 @@ active {
     background-color: #fff;
     padding: 48px 20px 41px 20px;
     top: 30%;
-    width: 618px;
+    width: 100%;
     height: 100%;
     position: relative;
     border-radius: 8px;
@@ -115,8 +115,9 @@ active {
     align-items: center;
     margin: 20% auto 0;
     transform: translateY(-50%);
+    overflow-y: auto;
+    max-height: 100vh;
   }
-
   .modal-popup {
     display: flex;
     justify-self: center;
@@ -124,11 +125,28 @@ active {
   }
 
   .movie-poster {
-    width: 264px;
     margin-right: 32px;
   }
 
+  .modal-content {
+    background-color: #fff;
+    padding: 42px 30px 40px 28px;
+    max-width: 618px;
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    margin: 20% auto 0;
+    transform: translateY(-50%);
+    overflow-y: auto;
+    max-height: 100vh;
+  }
+
   .modal-poster {
+    width: 100%;
+    height: auto;
     margin-bottom: 30px;
   }
 
@@ -177,95 +195,6 @@ active {
     gap: 15px;
     justify-content: center;
     align-items: flex-end;
-    margin-top: 10px;
-  }
-
-  .modal-button {
-    width: 125.032px;
-    height: 44px;
-    border-radius: 5px;
-    background-color: #ffffff;
-  }
-
-  .modal-button:hover,
-  active {
-    background-color: #ff6b01;
-    color: #ffffff;
-    border: none;
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  .modal-popup {
-    display: flex;
-    justify-self: center;
-    align-self: center;
-  }
-
-  .movie-poster {
-    width: 396px;
-    margin-right: 20px;
-  }
-
-  .modal-content {
-    background-color: #fff;
-    padding: 50px 30px 40px 30px;
-    max-width: 882px;
-    top: 5%;
-    width: 100%;
-    height: auto;
-    position: relative;
-    border-radius: 8px;
-    justify-content: center;
-    align-items: center;
-    margin: 20% auto 0;
-    transform: translateY(-50%);
-  }
-
-  .main-title {
-    text-transform: uppercase;
-    font-size: 30px;
-    font-style: normal;
-    font-weight: 500;
-    margin-bottom: 20px;
-  }
-
-  .movie-details {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding-right: 20px;
-    box-sizing: border-box;
-    gap: 10px;
-    font-size: 12px;
-    line-height: 16px;
-  }
-
-  .categ {
-    color: #8c8c8c;
-    display: inline-block;
-    width: 50%;
-    text-align: left;
-  }
-
-  .val {
-    display: inline-block;
-    width: 50%;
-    text-align: left;
-  }
-
-  .abt {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    line-height: 20px;
-  }
-
-  .button-div {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    align-items: flex-end;
     margin-top: 11px;
   }
 
@@ -283,6 +212,91 @@ active {
     border: none;
   }
 }
+
+/////////////////
+
+// .modal-popup {
+//   display: flex;
+//   justify-self: center;
+//   align-self: center;
+// }
+
+// .movie-poster {
+//   margin-right: 20px;
+// }
+
+// .modal-content {
+//   background-color: #fff;
+//   padding: 50px 30px 40px 30px;
+//   max-width: 882px;
+//   width: 100%;
+//   height: auto;
+//   position: relative;
+//   border-radius: 8px;
+//   justify-content: center;
+//   align-items: center;
+//   margin: 20% auto 0;
+//   transform: translateY(-50%);
+// }
+
+// .main-title {
+//   text-align: center;
+//   text-transform: capitalize;
+//   font-size: 30px;
+//   font-style: normal;
+//   font-weight: 500;
+//   margin-bottom: 20px;
+// }
+
+// .movie-details {
+//   display: flex;
+//   flex-direction: column;
+//   flex: 1;
+//   padding-right: 20px;
+//   box-sizing: border-box;
+//   gap: 10px;
+// }
+
+// .categ {
+//   color: #8c8c8c;
+//   display: inline-block;
+//   width: 50%;
+//   text-align: left;
+// }
+
+// .val {
+//   display: inline-block;
+//   width: 50%;
+//   text-align: left;
+// }
+
+// .abt {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 10px;
+// }
+
+// .button-div {
+//   display: flex;
+//   gap: 15px;
+//   justify-content: center;
+//   align-items: flex-end;
+//   margin-top: 11px;
+// }
+
+// .modal-button {
+//   width: 136px;
+//   height: 44px;
+//   border-radius: 5px;
+//   background-color: #ffffff;
+// }
+
+// .modal-button:hover,
+// active {
+//   background-color: #ff6b01;
+//   color: #ffffff;
+//   border: none;
+// }
 
 .close-modal {
   position: absolute;

@@ -107,7 +107,7 @@ active {
     background-color: #fff;
     padding: 48px 20px 41px 20px;
     top: 30%;
-    width: 618px;
+    width: 100%;
     height: 100%;
     position: relative;
     border-radius: 8px;
@@ -116,7 +116,6 @@ active {
     margin: 20% auto 0;
     transform: translateY(-50%);
   }
-
   .modal-popup {
     display: flex;
     justify-self: center;
@@ -129,6 +128,8 @@ active {
   }
 
   .modal-poster {
+    width: auto;
+    height: 373.551px;
     margin-bottom: 30px;
   }
 

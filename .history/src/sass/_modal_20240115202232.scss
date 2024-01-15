@@ -28,7 +28,7 @@
 }
 
 .modal-poster {
-  width: 100%; /* Set the width to 100% for mobile screens */
+  width: 240px; /* Set the width to 100% for mobile screens */
   height: auto; /* Allow the height to adjust based on the width */
   margin-bottom: 30px;
 }
@@ -107,7 +107,7 @@ active {
     background-color: #fff;
     padding: 48px 20px 41px 20px;
     top: 30%;
-    width: 618px;
+    width: 100%;
     height: 100%;
     position: relative;
     border-radius: 8px;
@@ -115,8 +115,9 @@ active {
     align-items: center;
     margin: 20% auto 0;
     transform: translateY(-50%);
+    overflow-y: auto;
+    max-height: 100vh;
   }
-
   .modal-popup {
     display: flex;
     justify-self: center;
@@ -129,6 +130,8 @@ active {
   }
 
   .modal-poster {
+    width: 100%;
+    height: auto;
     margin-bottom: 30px;
   }
 
