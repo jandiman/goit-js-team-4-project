@@ -11,20 +11,7 @@
   align-items: center;
 }
 
-// .modal-content {
-//   background-color: #fff;
-//   padding: 48px 20px 41px 20px;
-//   max-width: 280px;
-//   width: 100%;
-//   height: 100%;
-//   position: relative;
-//   border-radius: 8px;
-//   justify-content: center;
-//   align-items: center;
-//   margin: 20% auto 0;
-//   transform: translateY(-50%);
-// }
-
+/* Updated styles for .modal-content */
 .modal-content {
   background-color: #fff;
   padding: 50px 30px 40px 30px;
@@ -35,7 +22,7 @@
   border-radius: 8px;
   justify-content: center;
   align-items: center;
-  margin: 20% auto 0;
+  margin: 20% auto 0; /* Center vertically with margin and transform */
   transform: translateY(-50%);
 }
 
@@ -46,7 +33,7 @@
 }
 
 .movie-poster {
-  margin-right: 20px;
+  margin-right: 20px; /* Add margin to separate the poster from the details */
 }
 
 .main-title {
@@ -61,29 +48,26 @@
 .movie-details {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  padding-right: 20px;
-  box-sizing: border-box;
+  flex: 1; /* Take remaining space */
+  padding-right: 20px; /* Adjust as needed */
+  box-sizing: border-box; /* Include padding in the width */
   gap: 10px;
 }
 
 .categ {
   color: #8c8c8c;
-  display: inline-block;
-  width: 50%;
-  text-align: left;
 }
 
-.val {
-  display: inline-block;
-  width: 50%;
-  text-align: left;
+.movie-details .categ {
+  text-align: center;
 }
 
-.abt {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.movie-details .val {
+  text-align: center;
+}
+
+.about {
+  text-align: none;
 }
 
 .button-div {
@@ -152,6 +136,7 @@ active {
 }
 
 .modal-poster {
-  width: auto;
-  height: 477.8px;
+  width: auto; /* Set the maximum width to 100% */
+  height: 477.8px; /* Allow the height to adjust based on the width */
+  /* Ensure the image is a block element */
 }

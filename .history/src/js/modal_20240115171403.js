@@ -81,15 +81,14 @@ const modalModule = (function () {
             </div>
             <div class="movie-details">
               <h2 class="title main-title">${movieData.title}</h2>
-              <p><span class="categ">Vote / Votes </span><span class="val">${movieData.vote}</span></p>
+              <p><span class="categ">Vote / Votes </span><span class="val">${movieData.votes}</span></p>
               <p><span class="categ">Popularity</span><span class="val">${movieData.popularity}</span></p>
               <p class="title"><span class="categ">Original Title</span><span class="val">${movieData.title}</span></p>
-              <p><span class="categ">Genre</span><span class="val">${movieData.genres}</span></p>
+              <p><span class="categ">Genre</span><span class="val">${movieData.genre}</span></p>
               
-              <div class="abt">
               <p>ABOUT</p>
               <p>${movieData.overview}</p>
-              </div>
+              
               <div class="button-div">
                 <button class="modal-button">ADD TO WATCHED</button>
                 <button class="modal-button">ADD TO QUEUE</button>
@@ -119,4 +118,6 @@ const modalModule = (function () {
   };
 })();
 
-document.addEventListener('DOMContentLoaded', function () {});
+document.addEventListener('DOMContentLoaded', function () {
+  // No redundant definitions or event listeners here
+});
