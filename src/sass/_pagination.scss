@@ -1,0 +1,45 @@
+/* Optional: Add a style for the container of the Swiper */
+.swiper-container {
+  width: 100%;
+  padding: 20px;
+}
+
+/* Style for individual slides */
+.swiper-slide {
+  background-color: #eee;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Style for the navigation buttons (prev/next) */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+}
+
+/* Style for the pagination bullets */
+.footer-swiper-pagination {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.footer-swiper-pagination .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: #007bff;
+  opacity: 0.7;
+  margin: 0 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.footer-swiper-pagination .swiper-pagination-bullet-active {
+  opacity: 1;
+}
