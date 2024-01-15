@@ -77,27 +77,56 @@ const modalModule = (function () {
             const content = document.createElement('div');
             content.innerHTML = `<div class="modal-popup">
             <div class="movie-poster">
-            <img src="https://image.tmdb.org/t/p/w500${movieData.poster_path}" alt="${movieData.title}" class="modal-poster" />
+            <img src="${
+            movieData.poster_path
+              ? `https://image.tmdb.org/t/p/w500${movieData.poster_path}`
+              : 'https://static.wikia.nocookie.net/ideas/images/6/66/FoxAndroidTM2%27s_No_Poster.jpg'
+              }" alt="${movieData.title}" class="modal-poster" />
             </div>
             <div class="movie-details">
               <h2 class="title main-title">${movieData.title}</h2>
-              <p><span class="categ">Vote / Votes </span><span class="val">${movieData.vote}</span></p>
-              <p><span class="categ">Popularity</span><span class="val">${movieData.popularity}</span></p>
+              <p><span class="categ">Vote / Votes </span><span class="val">${`${movieData.vote_average}`.padStart(0,'0')}</span></p>
+              <p><span class="categ">Popularity</span><span class="val">${  movieData.popularity}</span></p>
               <p class="title"><span class="categ">Original Title</span><span class="val">${movieData.title}</span></p>
-              <p><span class="categ">Genre</span><span class="val">${movieData.genres}</span></p>
+              <p><span class="categ">Genre</span>${movieData.genres
+                .map(({ name }) => {
+                  return ` ${name}`;
+                })
+                .join(',').trim()}</span></p>
               
               <div class="abt">
               <p>ABOUT</p>
               <p>${movieData.overview}</p>
               </div>
               <div class="button-div">
-                <button class="modal-button">ADD TO WATCHED</button>
-                <button class="modal-button">ADD TO QUEUE</button>
+                <button class="modal-button btn-page" data-watch="${movieData.id}">ADD TO WATCHED</button>
+                <button class="modal-button btn-page" data-queue="${movieData.id}">ADD TO QUEUE</button>
               </div>
               </div>
               </div>
             `;
             showModal(content);
+
+            const btnWatch = document.querySelector('button[data-watch]');
+            const btnQueue = document.querySelector('button[data-queue]');
+            const dataLoad = {
+              dataQueued:[],
+              dataWatched:[],
+            };
+
+            if(!localStorage.getItem('SAVED_CURRENT')){
+              localStorage.setItem('SAVED_CURRENT',JSON.stringify(dataLoad));
+            }
+            
+            btnWatch.addEventListener('click',(event)=>{
+              dataLoad.dataWatched.push(event.currentTarget.dataset.watch)
+              localStorage.setItem('SAVED_CURRENT',JSON.stringify(dataLoad));
+            })
+
+            btnQueue.addEventListener('click',(event)=>{
+              dataLoad.dataQueued.push(event.currentTarget.dataset.queue)
+              localStorage.setItem('SAVED_CURRENT',JSON.stringify(dataLoad));
+            });
           } catch (error) {
             console.error('Error fetching movie information:', error);
           } finally {

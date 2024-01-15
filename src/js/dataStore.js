@@ -22,6 +22,8 @@ const defaults = {
 };
 let currentOpen = '';
 
+
+
 async function movieRender() {
   try {
     contentEl.innerHTML = '';
