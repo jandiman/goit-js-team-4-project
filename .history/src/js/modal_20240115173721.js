@@ -119,4 +119,6 @@ const modalModule = (function () {
   };
 })();
 
-document.addEventListener('DOMContentLoaded', function () {});
+document.addEventListener('DOMContentLoaded', function () {
+  // No redundant definitions or event listeners here
+});
