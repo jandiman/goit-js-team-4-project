@@ -66,12 +66,6 @@ br {
   color: var(--red);
 }
 
-.is-hidden {
-  visibility: none;
-  opacity: 0;
-  pointer-events: none;
-}
-
 .footer-backdrop {
   position: fixed;
   top: 0;
@@ -85,13 +79,24 @@ br {
   overflow: hidden;
 }
 
+.is-hidden {
+  visibility: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.footer-backdrop.is-hidden .footer-modal {
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+
 .footer-modal {
   position: relative;
   top: 50%;
   left: 50%;
   background-color: var(--dirtywhite);
-  margin-top: 20px;
-  margin-bottom: 30px;
+  // margin-top: 20px;
+  // margin-bottom: 30px;
   padding-top: 20px;
   padding-bottom: 50px;
   overflow: auto;
@@ -106,11 +111,8 @@ br {
 
   @media screen and (min-width: 768px) {
     width: 720px;
+    margin-bottom: 40px;
   }
-}
-
-.footer-backdrop.is-hidden .footer-modal {
-  transform: translate(-50%, -50%) scale(0);
 }
 
 .footer-modal-close {
