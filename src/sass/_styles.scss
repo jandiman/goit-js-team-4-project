@@ -302,14 +302,56 @@ button.active {
   display: flex;
   justify-content: center;
   gap: 5px;
+  margin-top: 20px; /* Add a top margin for separation */
 }
 
+.pageNumbers li {
+  list-style: none; /* Remove default list styling */
+}
+
+.pageNumbers button {
+  background-color: #4caf50; /* Background color for the buttons */
+  color: #fff; /* Text color for the buttons */
+  border: none;
+  padding: 8px 12px; /* Adjust padding for better button size */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+
+  /* Optional: Hover effect */
+  &:hover {
+    background-color: #45a049; /* Darker color on hover */
+  }
+
+  /* Optional: Active state */
+  &:active {
+    background-color: #3e8e41; /* Darker color when pressed */
+  }
+}
+
+/* Additional styles for pagination buttons */
+.btn-page-container {
+  list-style: none;
+  display: flex;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Apply flex styling to list items for horizontal alignment */
+.btn-page-container li {
+  display: flex;
+}
+
+/* Apply styles to pagination buttons */
 .btn-page {
   font-size: 12px;
-  padding: 5px;
+  padding: 5px 10px;
   cursor: pointer;
-  border: none;
-  background: none;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-page.active,
@@ -317,13 +359,16 @@ button.active {
   border-radius: 5px;
   color: #fff;
   background: #ff6b08;
+  border: 1px solid #ff6b08;
 }
 
+/* Center pagination */
 .pagination {
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
 }
+
 // ========================
 //    END OF HEADER AND CONTENT
 // =========================
