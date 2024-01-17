@@ -56,7 +56,7 @@ navHeader.addEventListener('click', (event)=>{
     const btnWatched = document.querySelector('button[data-watched]');
     const btnQueue = document.querySelector('button[data-queued]');
 
-    data = localStorage.getItem('SAVED_CURRENT');
+    let data = localStorage.getItem('SAVED_CURRENT');
         console.log(JSON.parse(data));
         data = JSON.parse(data);
         data.dataWatched.forEach((el)=>{
