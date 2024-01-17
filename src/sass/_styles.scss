@@ -259,6 +259,8 @@ button.active {
   width: fit-content;
   position: relative;
   border-radius: 5px;
+  padding-bottom: 10px;
+  
   overflow: hidden;
 }
 
@@ -301,6 +303,7 @@ button.active {
 .pageNumbers {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 5px;
   margin-top: 20px; /* Add a top margin for separation */
 }
@@ -351,7 +354,13 @@ button.active {
   border: 1px solid #ccc;
   background-color: #fff;
   color: #333;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transform: scale(1);
+  transition: background-color 0.3s ease, color 0.3s ease,
+  transform 0.3s ease;
+}
+
+.btn-page:hover{
+  transform: scale(1.2);
 }
 
 .btn-page.active,
@@ -361,6 +370,15 @@ button.active {
   background: #ff6b08;
   border: 1px solid #ff6b08;
 }
+
+.page-edge {
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: block;
+  }
+}
+
 
 /* Center pagination */
 .pagination {
@@ -633,6 +651,15 @@ button.active {
 
 // style for card poster
 // item description
+.content-container {
+  @media screen and (min-width:1024px) {
+    width: 920px;
+  }
+  @media screen and (min-width:1280px) {
+    width: 1245px;
+  }
+}
+
 .content {
   display: flex;
   flex-wrap: wrap;
@@ -640,6 +667,13 @@ button.active {
   min-height: 450px;
   justify-content: center;
   @media screen and (min-width: 768px) {
+    padding: 0 76px;
+    column-gap: 0;
+    justify-content: space-between;
+  }
+  @media screen and (min-width: 1024px) {
+    padding: 0;
+    column-gap: 3%;
     justify-content: flex-start;
   }
 }

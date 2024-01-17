@@ -26,4 +26,4 @@ const swiper = new Swiper('.mySwiper', {
   },
 });
 
-swiper.nextSlide();
+// swiper.nextSlide();
