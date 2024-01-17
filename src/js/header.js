@@ -57,7 +57,7 @@ navHeader.addEventListener('click', (event)=>{
     const btnQueue = document.querySelector('button[data-queued]');
 
     let data = localStorage.getItem('SAVED_CURRENT');
-        console.log(JSON.parse(data));
+        // console.log(JSON.parse(data));
         data = JSON.parse(data);
         data.dataWatched.forEach((el)=>{
             btnTabRender(el);
@@ -66,13 +66,13 @@ navHeader.addEventListener('click', (event)=>{
     // create event
     // after rendering buttons
     btnWatched.addEventListener('click',(event)=>{
-        console.log('watched');
+        // console.log('watched');
 
         event.currentTarget.classList.add('active');
         btnQueue.classList.remove('active');
 
         let data = JSON.parse(localStorage.getItem('SAVED_CURRENT')).dataWatched;
-        console.log(!data);
+        // console.log(!data);
         if(data.length === 0){
             contentEl.innerHTML = "WALAY SULOD ang WATCHED!";
             return;
@@ -82,21 +82,21 @@ navHeader.addEventListener('click', (event)=>{
 
 
         data.forEach((el)=>{
-            console.log(data);
+            // console.log(data);
             btnTabRender(el);
         })
 
         // btnTabRender(data.currentWatch);
     });
     btnQueue.addEventListener('click', event =>{
-        console.log('queue');
+        // console.log('queue');
         
         event.currentTarget.classList.add('active');
         btnWatched.classList.remove('active');
         
 
         let data = JSON.parse(localStorage.getItem('SAVED_CURRENT')).dataQueued;
-        console.log(data);
+        // console.log(data);
         if(data.length === 0){
             contentEl.innerHTML = "WALAY SULOD ang QUEUE!";
             return;
@@ -104,9 +104,9 @@ navHeader.addEventListener('click', (event)=>{
 
         contentEl.innerHTML = '';
         
-        console.log(data)
+        // console.log(data)
         data.forEach((data)=>{
-            console.log(data);
+            // console.log(data);
             btnTabRender(data);
         });
 
@@ -121,7 +121,7 @@ async function btnTabRender(data1) {
             // rendering markup
             contentEl.insertAdjacentHTML('beforeend',renderItemFromLibrary(data));
             }catch(err){
-                console.log(err);
+                // console.log(err);
             }
 }
 

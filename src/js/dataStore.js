@@ -7,7 +7,6 @@ import { Notify } from 'notiflix';
 import * as basicLightbox from 'basiclightbox';
 const instance = basicLightbox.create(`<span class="loader"></span>`);
 
-console.log(basicLightbox);
 
 const contentEl = document.querySelector('.content');
 const searchEl = document.querySelector('#search___form');
