@@ -84,11 +84,11 @@ const modalModule = (function () {
               }" alt="${movieData.title}" class="modal-poster" />
             </div>
             <div class="movie-details">
-              <h2 class="title main-title">${movieData.title}</h2>
+              <h2 class="title main-title"><a href="${movieData.homepage}" target="_target" class="link page">${movieData.title}</a></h2>
               <p><span class="categ">Vote / Votes </span><span class="val">${`${movieData.vote_average}`.padStart(0,'0')}</span></p>
               <p><span class="categ">Popularity</span><span class="val">${  movieData.popularity}</span></p>
               <p class="title"><span class="categ">Original Title</span><span class="val">${movieData.title}</span></p>
-              <p><span class="categ">Genre</span>${movieData.genres
+              <p><span class="categ">Genre:</span><span class="genre-list">${movieData.genres
                 .map(({ name }) => {
                   return ` ${name}`;
                 })
@@ -109,23 +109,75 @@ const modalModule = (function () {
 
             const btnWatch = document.querySelector('button[data-watch]');
             const btnQueue = document.querySelector('button[data-queue]');
-            const dataLoad = {
-              dataQueued:[],
-              dataWatched:[],
-            };
+            
 
             if(!localStorage.getItem('SAVED_CURRENT')){
-              localStorage.setItem('SAVED_CURRENT',JSON.stringify(dataLoad));
+              localStorage.setItem('SAVED_CURRENT',JSON.stringify({
+                dataQueued:[],
+                dataWatched:[],
+              }));
+              return;
             }
+            const dataLoad = JSON.parse(localStorage.getItem('SAVED_CURRENT'));
+            dataLoad.dataQueued.map(el => {
+              console.log('element:',el);
+              if(el === movieId){
+                btnQueue.textContent = 'added to Queued';
+                btnQueue.classList.add('active');
+              }
+            })
+            dataLoad.dataWatched.map(el => {
+              console.log('element:',el);
+              if(el === movieId){
+                btnWatch.textContent = 'added to watched';
+                btnWatch.classList.add('active');   
+              }
+            })
             
             btnWatch.addEventListener('click',(event)=>{
-              dataLoad.dataWatched.push(event.currentTarget.dataset.watch)
+              const id = event.currentTarget.dataset.watch;
+              for (const data of dataLoad.dataWatched) {
+                if(data === id){
+                  dataLoad.dataWatched.splice(dataLoad.dataWatched.indexOf(data),1);
+                  event.currentTarget.textContent = 'add to Watched';
+                  event.currentTarget.classList.remove('active');
+                  localStorage.setItem('SAVED_CURRENT',JSON.stringify(dataLoad));
+                  return;
+                }
+              }
+              dataLoad.dataWatched.push(id);
+              event.currentTarget.textContent = 'added to Watched';
+              event.currentTarget.classList.add('active');
               localStorage.setItem('SAVED_CURRENT',JSON.stringify(dataLoad));
+
+              if(dataLoad.dataPage === 'home'){
+                console.log('HOME PAGE');
+                return;
+              }
+              console.log('LIBRARY PAGE');
             })
 
             btnQueue.addEventListener('click',(event)=>{
-              dataLoad.dataQueued.push(event.currentTarget.dataset.queue)
+              const id = event.currentTarget.dataset.queue;
+              for (const data of dataLoad.dataQueued) {
+                if(data === id){
+                  dataLoad.dataQueued.splice(dataLoad.dataQueued.indexOf(data),1);
+                  event.currentTarget.textContent = 'add to Queued';
+                  event.currentTarget.classList.remove('active');
+                  localStorage.setItem('SAVED_CURRENT',JSON.stringify(dataLoad));
+                  return;
+                }
+              }
+              dataLoad.dataQueued.push(id);
+              event.currentTarget.textContent = 'added to Queued';
+              event.currentTarget.classList.add('active');
               localStorage.setItem('SAVED_CURRENT',JSON.stringify(dataLoad));
+              
+              if(dataLoad.dataPage === 'home'){
+                console.log('HOME PAGE');
+                return;
+              }
+              console.log('LIBRARY PAGE');
             });
           } catch (error) {
             console.error('Error fetching movie information:', error);
@@ -148,4 +200,3 @@ const modalModule = (function () {
   };
 })();
 
-document.addEventListener('DOMContentLoaded', function () {});

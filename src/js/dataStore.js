@@ -15,7 +15,7 @@ const searchBox = document.querySelector('#header-option');
 const pageListEl = document.querySelector('#pageNumbers');
 const defaults = {
   data: 'trend',
-  page: '1',
+  page: 1,
   adult: 'false',
   sort: 'created_at.asc',
   lang: 'en-US',
@@ -67,10 +67,12 @@ async function movieRender() {
     pageListEl.insertAdjacentHTML(
       'beforeend',
       `
-        <li><button type="button" class="btn-page">&larr;</button></li>
+        <li><button type="button" class="btn-page" data-prev>&larr;</button></li>
         ${pageNav(total_pages)}
-        <li><button type="button" class="btn-page">&rarr;</button></li>`
+        <li><button type="button" class="btn-page" data-next>&rarr;</button></li>`
     );
+    buttonNext(movieRender);
+    buttonPrev(movieRender);
   } catch (err) {
     console.log(err);
   }
@@ -83,10 +85,6 @@ pageListEl.addEventListener('click', async event => {
   }
   defaults.page = event.target.dataset.page;
   console.log(event.target.dataset.page);
-  const loadDefaults = {
-    time_window: 'day', // 2 value [day/week]
-    ...defaults,
-  };
 
   if (currentOpen !== '') {
     movieRender();
@@ -121,10 +119,12 @@ pageListEl.addEventListener('click', async event => {
     pageListEl.insertAdjacentHTML(
       'beforeend',
       `
-        <li><button type="button" class="btn-page">&larr;</button></li>
+        <li><button type="button" class="btn-page" data-prev>&larr;</button></li>
         ${pageNav(total_pages)}
-        <li><button type="button" class="btn-page">&rarr;</button></li>`
+        <li><button type="button" class="btn-page" data-next>&rarr;</button></li>`
     );
+    buttonNext(this);
+    buttonPrev(this);
 
     instance.close();
   } catch (err) {
@@ -154,7 +154,7 @@ searchEl.addEventListener('submit', event => {
   console.log(JSON.stringify(defaults));
 });
 
-window.addEventListener('DOMContentLoaded', async () => {
+const loadTrend = async () => {
   const loadDefaults = {
     time_window: 'day', // 2 value [day/week]
     ...defaults,
@@ -163,7 +163,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   try {
     instance.show();
     const data = await movieTrend(loadDefaults);
-
+    contentEl.innerHTML = '';
     // get results
     // get total_pages
     const { results, total_pages } = data;
@@ -182,24 +182,34 @@ window.addEventListener('DOMContentLoaded', async () => {
         }
       })
       .join('');
-
+    
     pageListEl.innerHTML = '';
     pageListEl.insertAdjacentHTML(
       'beforeend',
       `
-        <li><button type="button" class="btn-page">&larr;</button></li>
+        <li><button type="button" class="btn-page" data-prev>&larr;</button></li>
         ${pageNav(total_pages)}
-        <li><button type="button" class="btn-page">&rarr;</button></li>`
+        <li><button type="button" class="btn-page" data-next>&rarr;</button></li>`
     );
 
-    Notify.success('All Trend movies are loaded!', {
-      position: 'center-top',
-    });
+    buttonNext(loadTrend);
+    buttonPrev(loadTrend);
     instance.close();
+
+    if(defaults.page !== 1){
+      return;
+    }
+    
+    Notify.success('All Trend movies are loaded!', {
+      position: 'center-center',
+      clickToClose: true,
+    });
   } catch (err) {
     console.log(err);
   }
-});
+}
+
+window.addEventListener('DOMContentLoaded', loadTrend);
 
 function renderItem(data) {
   // image link URL
@@ -245,10 +255,10 @@ const pageNav = pages => {
     default:
       numPage = parseInt(defaults.page) - 2;
       storedList += `
-                <li>
+                <li class="page-edge">
                 <span class="btn-page" data-page="1">1</span>
                 </li>
-                <li>...</li>`;
+                <li class="page-edge">...</li>`;
       break;
   }
   for (let i = numPage; i <= pages; i++) {
@@ -263,14 +273,30 @@ const pageNav = pages => {
     countdown += 1;
     if (countdown === 5) {
       storedList += `
-                <li>...</li>
-                <li>
-                <span class="btn-page" data-page="${pages}">${pages}</span>
+                <li class="page-edge">...</li>
+                <li  class="page-edge">
+                <span class="btn-page page-edge" data-page="${pages}">${pages}</span>
                 </li>`;
       break;
     }
   }
+
   return storedList;
 };
 
+function buttonNext(callback){
+  const button = document.querySelector('button[data-next]');
+  button.addEventListener('click',()=>{
+    defaults.page += 1;
+    callback();
+  })
+}
+function buttonPrev(callback){
+  const button = document.querySelector('button[data-prev]');
+
+  button.addEventListener('click',()=>{
+    defaults.page -= 1;
+    callback();
+  })
+}
 export default renderItem;
