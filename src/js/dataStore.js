@@ -13,6 +13,7 @@ const searchEl = document.querySelector('#search___form');
 const searchBox = document.querySelector('#header-option');
 const pageListEl = document.querySelector('#pageNumbers');
 const defaults = {
+  time_window: 'day',
   data: 'trend',
   page: 1,
   adult: 'false',
@@ -33,7 +34,7 @@ async function movieRender() {
     instance.close();
     // get results
     // get total_pages
-    const { results, total_pages } = data;
+    const { results, total_pages, page} = data;
     console.log(total_pages);
     if (results.length == 0) {
       if (!document.querySelector('.bad-result')) {
@@ -70,14 +71,14 @@ async function movieRender() {
         ${pageNav(total_pages)}
         <li><button type="button" class="btn-page" data-next>&rarr;</button></li>`
     );
-    buttonNext(movieRender);
-    buttonPrev(movieRender);
+    buttonNext(movieRender, page, total_pages+1);
+    buttonPrev(movieRender, page);
   } catch (err) {
     console.log(err);
   }
 }
 
-pageListEl.addEventListener('click', async event => {
+pageListEl.addEventListener('click', event => {
   console.log(event.target.nodeName);
   if (event.target.nodeName !== 'SPAN') {
     return;
@@ -89,46 +90,7 @@ pageListEl.addEventListener('click', async event => {
     movieRender();
     return;
   }
-
-  try {
-    instance.show();
-    const data = await movieTrend(loadDefaults);
-
-    // get results
-    // get total_pages
-    const { results, total_pages } = data;
-    // console.log(results);
-    // console.log(total_pages);
-
-    contentEl.innerHTML = '';
-    results
-      .map(async ({ id }) => {
-        try {
-          // calling data details of ids
-          const data = await movieDetail(id);
-          // rendering markup
-          contentEl.insertAdjacentHTML('beforeend', renderItem(data));
-        } catch (err) {
-          console.log(err);
-        }
-      })
-      .join('');
-
-    pageListEl.innerHTML = '';
-    pageListEl.insertAdjacentHTML(
-      'beforeend',
-      `
-        <li><button type="button" class="btn-page" data-prev>&larr;</button></li>
-        ${pageNav(total_pages)}
-        <li><button type="button" class="btn-page" data-next>&rarr;</button></li>`
-    );
-    buttonNext(this);
-    buttonPrev(this);
-
-    instance.close();
-  } catch (err) {
-    console.log(err);
-  }
+    loadTrend();
 });
 
 searchEl.addEventListener('submit', event => {
@@ -147,6 +109,7 @@ searchEl.addEventListener('submit', event => {
   if (document.querySelector('.bad-result')) {
     document.querySelector('.bad-result').remove();
   }
+  defaults.page = 1;
 
   movieRender();
 
@@ -154,18 +117,14 @@ searchEl.addEventListener('submit', event => {
 });
 
 const loadTrend = async () => {
-  const loadDefaults = {
-    time_window: 'day', // 2 value [day/week]
-    ...defaults,
-  };
-
   try {
     instance.show();
-    const data = await movieTrend(loadDefaults);
+    const data = await movieTrend(defaults);
+    data.total_pages = 50;
     contentEl.innerHTML = '';
     // get results
     // get total_pages
-    const { results, total_pages } = data;
+    const { results, total_pages, page } = data;
     // console.log(results);
     // console.log(total_pages);
 
@@ -191,8 +150,8 @@ const loadTrend = async () => {
         <li><button type="button" class="btn-page" data-next>&rarr;</button></li>`
     );
 
-    buttonNext(loadTrend);
-    buttonPrev(loadTrend);
+    buttonNext(loadTrend, page, total_pages+1);
+    buttonPrev(loadTrend, page);
     instance.close();
 
     if(defaults.page !== 1){
@@ -283,19 +242,29 @@ const pageNav = pages => {
   return storedList;
 };
 
-function buttonNext(callback){
+function buttonNext(callback, p, tp){
   const button = document.querySelector('button[data-next]');
   button.addEventListener('click',()=>{
-    defaults.page += 1;
-    callback();
+    defaults.page = p + 1;
+    if(defaults.page === tp){
+      defaults.page = p;
+      Notify.failure('exceeded maximum page!',{});
+      return;
+    }
+    return callback();
   })
 }
-function buttonPrev(callback){
+function buttonPrev(callback, p){
   const button = document.querySelector('button[data-prev]');
 
   button.addEventListener('click',()=>{
-    defaults.page -= 1;
-    callback();
+    defaults.page = p - 1;
+    if(defaults.page === 0){
+      defaults.page = p;
+      Notify.failure('exceeded minimum page!',{});
+      return;
+    }
+    return callback();
   })
 }
 export default renderItem;
